@@ -109,7 +109,7 @@ impl Component for Detail {
             Msg::MakePetsReq(id) => {
                 let req = Request::get(&format!("http://localhost:8000/owner/{}/pet", id))
                     .body(Nothing)
-                    .expect("can make req to backend");
+                    .expect("can make req to server");
 
                 let cb = self.link.callback(
                     |response: Response<Json<Result<Vec<PetResponse>, anyhow::Error>>>| {
@@ -125,7 +125,7 @@ impl Component for Detail {
             Msg::MakeOwnerReq(id) => {
                 let req = Request::get(&format!("http://localhost:8000/owner/{}", id))
                     .body(Nothing)
-                    .expect("can make req to backend");
+                    .expect("can make req to server");
 
                 let cb = self.link.callback(
                     |response: Response<Json<Result<OwnerResponse, anyhow::Error>>>| {
@@ -144,7 +144,7 @@ impl Component for Detail {
                     owner_id, pet_id
                 ))
                 .body(Nothing)
-                .expect("can make req to backend");
+                .expect("can make req to server");
 
                 let cb = self.link.callback(
                     move |response: Response<Json<Result<(), anyhow::Error>>>| {

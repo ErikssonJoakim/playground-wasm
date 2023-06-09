@@ -59,7 +59,7 @@ impl Component for List {
                 self.owners = None;
                 let req = Request::get("http://localhost:8000/owner")
                     .body(Nothing)
-                    .expect("can make req to backend");
+                    .expect("can make req to server");
 
                 let cb = self.link.callback(
                     |response: Response<Json<Result<Vec<OwnerResponse>, anyhow::Error>>>| {

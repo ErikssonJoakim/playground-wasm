@@ -93,7 +93,7 @@ impl Component for CreateForm {
                 let req = Request::post(&format!("http://localhost:8000/owner/{}/pet", id))
                     .header("Content-Type", "application/json")
                     .body(Json(&body))
-                    .expect("can make req to backend");
+                    .expect("can make req to server");
 
                 let cb = self.link.callback(
                     |response: Response<Json<Result<PetResponse, anyhow::Error>>>| {
