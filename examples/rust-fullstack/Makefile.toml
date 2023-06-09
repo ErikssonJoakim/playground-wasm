@@ -1,0 +1,44 @@
+[tasks.start-database]
+command = "docker"
+args = ["compose", "up", "--detach"]
+
+[tasks.remove-database]
+command = "docker"
+args = ["compose", "down"]
+
+[tasks.build-server]
+cwd = "./server/"
+command = "cargo"
+args = ["build"]
+
+[tasks.serve-server]
+cwd = "./server/"
+command = "cargo"
+args = ["run"]
+dependencies = ["start-database"]
+
+[tasks.build-client]
+cwd = "./client/"
+command = "trunk"
+args = ["build"]
+
+[tasks.serve-client]
+cwd = "./client/"
+command = "trunk"
+args = ["serve"]
+
+[tasks.run-server]
+run_task = { name = [
+    "build-server",
+    "serve-server"
+] }
+
+[tasks.run-client]
+run_task = { name = [
+   "build-client",
+    "serve-client"
+] }
+
+[config]
+default_to_workspace = false
+min_version = "0.36.9"
